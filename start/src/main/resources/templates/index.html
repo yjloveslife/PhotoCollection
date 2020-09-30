@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        // $(document).ready(function () {
+        //     alert("hello world");
+        // });
+        $(function () {
+            // var likeBtn = document.getElementById("img1");
+            // var $likeBtn2 = $(likeBtn);
+            var $num = $("img");
+            $("#btn").click(function () {
+                $num.hide(1000);
+            });
+            $("#btn2").click(function () {
+                $num.show(1000);
+            })
+            var $likeBtn = $("#img1");
+            var toggle = false;
+            // $likeBtn.click(function () {
+            //         if (toggle) {
+            //             $likeBtn.attr("src", "/img/like.png");
+            //             $likeBtn.attr("class", "like");
+            //             toggle = false;
+            //         } else {
+            //             $likeBtn.attr("src", "/img/liked.png");
+            //             $likeBtn.attr("class", "like2");
+            //             toggle = true;
+            //         }
+            //     }
+            // )
+
+            $(".like").click(function () {
+                $.ajax({
+                    url:[[@{/like}]],
+                        type:"GET",
+                    data:{"url":$(this).attr("value"),"src":$(this).attr("src")},
+                async:false,
+                    success:function(src) {
+                    // $(this).attr("src", data);
+                    alert($(src).attr("src"))
+
+                    }
+                 })
+            })
+        });
+    </script>
+</head>
+<style>
+    ul {
+        list-style-type: none;
+        list-style-image: none;
+    }
+
+    li {
+        float: left;
+    }
+
+    .divcenter {
+        margin: auto;
+        color: red;
+        border: 3px solid #999999;
+        text-align: center;
+    }
+
+    .login {
+        float: right;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .upload {
+        float: left;
+    }
+
+    .pic {
+        float: left;
+        /*margin: 50px 50px;*/
+        /*width: 100px;*/
+        /*height: 105px;*/
+        width: 200px;
+        height: 150px;
+        text-align: center;
+        position: relative;
+        overflow: visible;
+        border: 1px dashed transparent;
+        border-radius: 5px;
+        display: block;
+    }
+
+    .out {
+        display: block;
+        border: 1px solid #000000;
+        margin: 20px;
+        width: 210px;
+        height: 160px;
+    }
+/*
+    .out:hover {
+        -webkit-filter: blur(1px);
+        -moz-filter: blur(1px);
+        -o-filter: blur(1px);
+        -ms-filter: blur(1px);
+        filter: blur(0.5px);
+    }
+*/
+    .out .like {
+        width: 30px;
+        height: 30px;
+
+        position: relative;
+        top: -15px;
+    }
+
+    .like:hover {
+        content: url("/img/like2.png");
+    }
+</style>
+<body>
+
+<div class="divcenter">
+    <h1>主界面</h1>
+
+<!--    <a th:if="${#strings.isEmpty(username)}" th:href="@{/login}" class="login">登录</a>-->
+    <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" class="login">登录</a>
+    <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" class="login">个人信息</a>
+    <a th:href="@{/pic}" class="upload">
+        <button>上传</button>
+    </a>
+    <input type="button" id="btn" value="hide">
+    <input type="button" id="btn2" value="show">
+</div>
+
+<ul th:each="url:${picname}">
+    <li>
+        <div class="out">
+            <img th:src="${'/pic/'+url}" class="pic">
+<!--            <form th:action="@{/like}" method="post">-->
+<!--                <input type="hidden" th:value="${url}" name="url">-->
+<!--                <input type="submit" value="❤" class="btn_like" >-->
+<!--                    <img th:id="img1" th:src="@{/img/like.png}" class="like"> 晚点弄-->
+<!--                </input>-->
+<!--            </form>-->
+<!--            <a th:href="@{/like(url=${url})}">-->
+                <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+        </div>
+    </li>
+</ul>
+</body>
+</html>

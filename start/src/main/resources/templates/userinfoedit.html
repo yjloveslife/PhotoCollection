@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/infoedit}">
+    <input type="text" th:value="${username}" name="username">
+    <input type="text" th:value="${email}" name="email">
+    <input type="text" th:value="${qq}" name="qq">
+    <input type="submit" value="确认修改">
+</form>
+</body>
+</html>
