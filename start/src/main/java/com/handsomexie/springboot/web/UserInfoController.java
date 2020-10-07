@@ -96,8 +96,8 @@ public class UserInfoController {
         List<String> temp = picinfoserivce.selectAll();
         model.addAttribute("picname", temp);//图片名称，用作button id
         UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
-        String username =userInfo.getUsername();
-        if (!username .equals("")) {
+        if (userInfo!=null) {
+            String username =userInfo.getUsername();
             ArrayList<String> likelist = likeService.selectByUsername(username);
             model.addAttribute("likelist",likelist);
         }
@@ -114,7 +114,7 @@ public class UserInfoController {
             return "un";
         }
         String username = userInfo.getUsername();
-        like record = new like(username + url, username, url);
+        like record = new like(username + url, username, url,String.valueOf(System.currentTimeMillis()));
         like like1 = likeService.selectByPrimaryKey(username + url);
         if (like1 == null) {
             likeService.insert(record);

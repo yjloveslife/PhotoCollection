@@ -5,9 +5,10 @@
     <id column="upid" jdbcType="VARCHAR" property="upid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="picname" jdbcType="VARCHAR" property="picname" />
+    <result column="liketime" jdbcType="VARCHAR" property="liketime" />
   </resultMap>
   <sql id="Base_Column_List">
-    upid, username, picname
+    upid, username, picname, liketime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -20,16 +21,17 @@
     picname
     from likeit
     where username = #{username,jdbcType=VARCHAR}
+    ORDER BY liketime DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from likeit
     where upid = #{upid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.handsomexie.springboot.model.like">
-    insert into likeit (upid, username, picname
-      )
-    values (#{upid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{picname,jdbcType=VARCHAR}
-      )
+    insert into likeit (upid, username, picname,
+    liketime)
+    values (#{upid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{picname,jdbcType=VARCHAR},
+      #{liketime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.handsomexie.springboot.model.like">
     insert into likeit
@@ -43,6 +45,9 @@
       <if test="picname != null">
         picname,
       </if>
+      <if test="liketime != null">
+        liketime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="upid != null">
@@ -53,6 +58,9 @@
       </if>
       <if test="picname != null">
         #{picname,jdbcType=VARCHAR},
+      </if>
+      <if test="liketime != null">
+        #{liketime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -65,13 +73,17 @@
       <if test="picname != null">
         picname = #{picname,jdbcType=VARCHAR},
       </if>
+      <if test="liketime != null">
+        liketime = #{liketime,jdbcType=VARCHAR},
+      </if>
     </set>
     where upid = #{upid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.handsomexie.springboot.model.like">
     update likeit
     set username = #{username,jdbcType=VARCHAR},
-      picname = #{picname,jdbcType=VARCHAR}
+      picname = #{picname,jdbcType=VARCHAR},
+      liketime = #{liketime,jdbcType=VARCHAR}
     where upid = #{upid,jdbcType=VARCHAR}
   </update>
 </mapper>

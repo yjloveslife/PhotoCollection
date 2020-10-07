@@ -1,16 +1,19 @@
 package com.handsomexie.springboot.model;
 
 public class like {
-    public like(String a,String b,String c){
+    public like(String a,String b,String c ,String d){
         upid=a;
         username=b;
         picname=c;
+        liketime=d;
     }
     private String upid;
 
     private String username;
 
     private String picname;
+
+    private String liketime;
 
     public String getUpid() {
         return upid;
@@ -34,5 +37,13 @@ public class like {
 
     public void setPicname(String picname) {
         this.picname = picname;
+    }
+
+    public String getTime() {
+        return liketime;
+    }
+
+    public void setTime(String time) {
+        this.liketime = time;
     }
 }
