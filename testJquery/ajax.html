@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#name,#pwd").blur(function () {
+                var a = $("#name").val();
+                var b = $("#pwd").val();
+                if (a == "" || b == "") {
+                    $("#submit").attr("disabled", true);
+                    $("#tip1").text("账号密码不能为空");
+                } else {
+                    $("#submit").attr("disabled", false);
+                    $("#tip1").text("");
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="mydiv">
+
+    <form>
+        <input type="text" id="name"><br>
+        <span id="tip1">&emsp;</span><br>
+        <input type="text" id="pwd"><br>
+        <span id="tip2">&emsp;</span><br>
+        <input type="submit" id="submit" disabled>
+    </form>
+</div>
+</body>
+</html>

@@ -39,4 +39,9 @@ public class PicInfoServiceImpl implements PicInfoService {
         return picinfo;
     }
 
+    @Override
+    public ArrayList<String> selectUpload(String username) {
+        return picinfomapper.selectUpload(username);
+    }
+
 }

@@ -10,7 +10,7 @@
     username, password, phone
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from userinfo
     where username = #{username,jdbcType=VARCHAR}

@@ -18,4 +18,6 @@ public interface PicInfoMapper {
     int updateByPrimaryKey(PicInfo record);
 
     ArrayList<String> selectAll();
+
+    ArrayList<String> selectUpload(String username);
 }

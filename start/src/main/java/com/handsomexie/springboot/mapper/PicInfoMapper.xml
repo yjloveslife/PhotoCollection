@@ -25,6 +25,13 @@
     from picinfo
     ORDER BY pid DESC
   </select>
+    <select id="selectUpload"  parameterType="java.lang.String" resultType="java.lang.String">
+    select
+        pic_name
+    from picinfo
+    where username = #{picName,jdbcType=VARCHAR}
+    ORDER BY pid DESC
+  </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from picinfo
     where pic_name = #{picName,jdbcType=VARCHAR}

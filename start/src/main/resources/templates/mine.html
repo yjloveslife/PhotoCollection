@@ -4,19 +4,40 @@
     <meta charset="UTF-8">
     <title>我的信息</title>
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript"  th:inline="javascript">
         $(function () {
+            $("#myupload").click(function () {
+                $.ajax({
+                    url:[[@{/mineupload}]],
+                        type:"GET",
+                    data:{"url":$(this).attr("value")},
+                async:false,
+                    success:function(url) {
+                        alert(url)
+                    $("#change_mod").empty();
+                    var a="hello"
+                    $("#change_mod").append(a);//////////////////////////////////搁置
+                    }
+                })
+            });
             $("#head_pic").click(function () {
                 $("#upload").trigger("click");
                 $("#submit").attr("disabled", false);
             });
-
         })
     </script>
 </head>
 <style>
     body {
         font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+    }
+    ul {
+        list-style-type: none;
+        list-style-image: none;
+    }
+
+    li {
+        float: left;
     }
     .head {
         /*margin: 10px;*/
@@ -68,7 +89,7 @@
     .mid {
         border: 1px solid #000;
         width: 97%;
-        height: 200px;
+        height: 180px;
         padding-top: 60px;
         padding-bottom: 72px;
         padding-left: 12px;
@@ -148,11 +169,48 @@
     .bot {
 
     }
+    .out {
+        display: block;
+        border: 1px solid #000000;
+        margin: 20px;
+        width: 210px;
+        height: 160px;
+    }
+    .out .like {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        top: -15px;
+    }
+    .like:hover {
+        content: url("/img/like2.png");
+    }
+
+    .out .like2 {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        top: -15px;
+    }
+    .pic {
+        float: left;
+        /*margin: 50px 50px;*/
+        /*width: 100px;*/
+        /*height: 105px;*/
+        width: 200px;
+        height: 150px;
+        text-align: center;
+        position: relative;
+        overflow: visible;
+        border: 1px dashed transparent;
+        border-radius: 5px;
+        display: block;
+    }
 </style>
 <body>
 <div class="head">
     <div class="logodiv">
-        <a th:href="@{/index}"><img src="/img/logo2.png" class="logo"></a>
+        <a th:href="@{/index2}"><img src="/img/logo2.png" class="logo"></a>
     </div>
     <div class="searchdiv">
         <form action="">
@@ -192,11 +250,21 @@
         <a th:href="@{/quit}" class="midrightquit">退出</a>
 
     </div>
-</div>
-<div class="bot">
-    收藏
-</div>
 
-
+</div>
+<div class="bot" >
+    <button style="display: block">收藏</button>
+    <button id="myupload">上传</button>
+    <div id="change_mod">
+    <ul th:each="url:${picname}" id="loop">
+        <li>
+            <div class="out">
+                <img th:src="${'/pic/'+url}" class="pic">
+                <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+            </div>
+        </li>
+    </ul>
+    </div>
+</div>
 </body>
 </html>

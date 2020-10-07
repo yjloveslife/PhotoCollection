@@ -5,11 +5,20 @@
     <title>Title</title>
 </head>
 <body>
+<style>
+    .big {
+        width: 100px;
+        height: 100px;
+        margin: 200px auto;
+
+    }
+</style>
+<div class="big">
 <form th:action="@{/infoedit}">
-    <input type="text" th:value="${username}" name="username">
-    <input type="text" th:value="${email}" name="email">
-    <input type="text" th:value="${qq}" name="qq">
+    邮箱<input type="text" th:value="${email}" name="email"><br>
+    QQ：<input type="text" th:value="${qq}" name="qq">
     <input type="submit" value="确认修改">
 </form>
+</div>
 </body>
 </html>

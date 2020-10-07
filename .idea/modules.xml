@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/start/start.iml" filepath="$PROJECT_DIR$/start/start.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testJquery/testJquery.iml" filepath="$PROJECT_DIR$/testJquery/testJquery.iml" />
     </modules>
   </component>
 </project>
