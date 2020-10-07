@@ -21,7 +21,7 @@
             //     }
             // )
 
-            $(".like").click(function () {
+            $(".like").click(function () {//奇怪，class=like 点击才会触发，可是class改成like2 还是可以触发
                 $.ajax({
                     url:[[@{/like}]],
                         type:"GET",
