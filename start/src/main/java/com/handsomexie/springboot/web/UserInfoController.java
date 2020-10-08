@@ -294,9 +294,9 @@ public class UserInfoController {
     public @ResponseBody String delete(String url1) {
         File file = new File(url+url1);
         System.out.println(url+url1);
-        file.delete();
-        int a = picinfoserivce.deleteByPrimaryKey(url1);
-        System.out.println(a);
+        file.delete();//删除文件
+        picinfoserivce.deleteByPrimaryKey(url1);//删除sql中的文件信息
+        likeService.deleteByPicname(url1);
         return url1;
     }
     public String loginreturn(int a) {

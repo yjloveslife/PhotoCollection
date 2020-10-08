@@ -23,6 +23,12 @@
     where username = #{username,jdbcType=VARCHAR}
     ORDER BY liketime DESC
   </select>
+  <select id="selectByPicname" parameterType="java.lang.String" resultType="java.lang.String">
+    select
+    username
+    from likeit
+    where picname = #{picname,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from likeit
     where upid = #{upid,jdbcType=VARCHAR}

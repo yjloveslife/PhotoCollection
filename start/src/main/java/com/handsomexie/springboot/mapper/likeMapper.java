@@ -15,6 +15,8 @@ public interface likeMapper {
 
     ArrayList<String> selectByUsername(String username);
 
+    ArrayList<String> selectByPicname(String picname);
+
     int updateByPrimaryKeySelective(like record);
 
     int updateByPrimaryKey(like record);
