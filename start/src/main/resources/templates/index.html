@@ -70,13 +70,27 @@
         float: left;
     }
 
+    .logodiv {
+        width: 50px;
+        height: 50px;
+        float: left;
+    }
+    .logo {
+        width: 50px;
+        height: 48px;
+        display: inline;
+    }
     .divcenter {
         margin: auto;
-        color: red;
+        color: #232323;
         border: 3px solid #999999;
         text-align: center;
     }
-
+    .minehead {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+    }
     .login {
         float: right;
         font-size: 20px;
@@ -84,7 +98,7 @@
     }
 
     .upload {
-        float: left;
+        float: right;
     }
 
     .pic {
@@ -97,15 +111,15 @@
         text-align: center;
         position: relative;
         overflow: visible;
-        border: 1px dashed transparent;
+        /*border: 1px dashed transparent;*/
         border-radius: 5px;
         display: block;
     }
 
     .out {
         display: block;
-        border: 1px solid #000000;
-        margin: 20px;
+        /*border: 1px solid #000000;*/
+        margin: 30px;
         width: 210px;
         height: 160px;
     }
@@ -122,7 +136,6 @@
         width: 30px;
         height: 30px;
         position: relative;
-        top: -15px;
     }
     .like:hover {
         content: url("/img/like2.png");
@@ -131,17 +144,21 @@
         width: 30px;
         height: 30px;
         position: relative;
-        top: -15px;
     }
 </style>
 <body>
 
 <div class="divcenter">
-    <h1>主界面</h1>
+    <div class="logodiv">
+        <a th:href="@{/index2}"><img src="/img/logo2.png" class="logo"></a>
+    </div>
+    <div>
+        <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" class="login">登录</a>
+        <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" class="login"><img th:src="${'/pic/head/'+head}" class="minehead"></a>
+    </div>
+    <h1>COOOOOOOOOOOOL</h1>
     <span id="likemessage"></span>
-<!--    <a th:if="${#strings.isEmpty(username)}" th:href="@{/login}" class="login">登录</a>-->
-    <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" class="login">登录</a>
-    <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" class="login">个人信息</a>
+    <!--    <a th:if="${#strings.isEmpty(username)}" th:href="@{/login}" class="login">登录</a>-->
     <a th:href="@{/pic}" class="upload">
         <button>上传</button>
     </a>

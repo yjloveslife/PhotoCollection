@@ -81,11 +81,14 @@ public class UserInfoController {
 
 //        System.out.println(System.currentTimeMillis());//时间
 //        model.addAttribute("username", username);
+
         model.addAttribute("picname", temp);//所有上传de图片名，用作button id
         request.getSession().setAttribute("user", userInfo);
         if (userInfo != null) {
             ArrayList<String> likelist = likeService.selectByUsername(userInfo.getUsername());
-            model.addAttribute("likelist",likelist);
+            model.addAttribute("likelist",likelist);//所有喜欢的图
+            UserMoreInfo userMoreInfo = usermoreinfoservice.selectByPrimaryKey(userInfo.getUsername());
+            model.addAttribute("head",userMoreInfo.getHead());
         }
         return "/index";
     }
@@ -100,6 +103,8 @@ public class UserInfoController {
             String username =userInfo.getUsername();
             ArrayList<String> likelist = likeService.selectByUsername(username);
             model.addAttribute("likelist",likelist);
+            UserMoreInfo userMoreInfo = usermoreinfoservice.selectByPrimaryKey(userInfo.getUsername());
+            model.addAttribute("head",userMoreInfo.getHead());
         }
         return "/index";
     }
@@ -168,9 +173,24 @@ public class UserInfoController {
         model.addAttribute("head", userMoreInfo.getHead());
         model.addAttribute("email", userMoreInfo.getEmail());
         model.addAttribute("qq", userMoreInfo.getQq());
-        ArrayList<String> urls = likeService.selectByUsername(userInfo.getUsername());
+        ArrayList<String> urls = likeService.selectByUsername(userInfo.getUsername());//收藏的图
         model.addAttribute("picname", urls);
         return "/mine";
+    }
+
+    @RequestMapping("/mine2")
+    public String mine2(Model model, HttpServletRequest request) {
+        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("user");
+        UserMoreInfo userMoreInfo = usermoreinfoservice.selectByPrimaryKey(userInfo.getUsername());
+        model.addAttribute("username", userInfo.getUsername());
+        model.addAttribute("head", userMoreInfo.getHead());
+        model.addAttribute("email", userMoreInfo.getEmail());
+        model.addAttribute("qq", userMoreInfo.getQq());
+        ArrayList<String> urls = picinfoserivce.selectUpload(userInfo.getUsername());//上传的图
+        model.addAttribute("picname", urls);
+        ArrayList<String> likelist = likeService.selectByUsername(userInfo.getUsername());
+        model.addAttribute("likelist",likelist);
+        return "/mine2";
     }
 
     //上传的图片 ajax
@@ -270,6 +290,15 @@ public class UserInfoController {
 //        }
     }
 
+    @RequestMapping("/delete")
+    public @ResponseBody String delete(String url1) {
+        File file = new File(url+url1);
+        System.out.println(url+url1);
+        file.delete();
+        int a = picinfoserivce.deleteByPrimaryKey(url1);
+        System.out.println(a);
+        return url1;
+    }
     public String loginreturn(int a) {
         if (a == 0) {
             return "无此用户";

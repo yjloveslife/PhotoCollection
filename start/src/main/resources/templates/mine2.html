@@ -13,10 +13,10 @@
                     data:{"url":$(this).attr("value")},
                 async:false,
                     success:function(url) {
-                        // alert(url)
-                    // $("#change_mod").empty();
-                    // var a="hello"
-                    // $("#change_mod").append(a);//////////////////////////////////搁置
+                        alert(url)
+                    $("#change_mod").empty();
+                    var a="hello"
+                    $("#change_mod").append(a);//////////////////////////////////搁置
                     }
                 })
             });
@@ -24,7 +24,7 @@
                 $("#upload").trigger("click");
                 $("#submit").attr("disabled", false);
             });
-            $(".like2").click(function () {
+            $(".like").click(function () {
                 $.ajax({
                     url:[[@{/like}]],
                         type:"GET",
@@ -41,8 +41,39 @@
                             $pic_jq.attr("class","like2")
                         }
                     }
-            })
+                })
             });
+            var pictest="view.jpg"
+            $(document).ready(function () {
+                if([[${#session.getAttribute('user') != null}]]){
+                    // $(".like:first").attr("src",[[@{/img/liked.png}]])
+                    // $(".like:first").attr("class","like2")
+                    var $temp
+                    $.each([[${likelist}]],function (i,val) {
+                        $temp = $(document.getElementById(val))
+                        $temp.attr("src",[[@{/img/liked.png}]])
+                        $temp.attr("class","like2")
+                    })
+                }
+            })
+
+            $(".delbtn").click(function () {
+                $.ajax({
+                    url:[[@{/delete}]],
+                        type:"GET",
+                    data:{"url1":$(this).val()},
+                async:false,
+                    success:function(url) {
+                        let a = url+"^"
+                        $deletebutton = $(document.getElementById(a))
+                        $deletebutton.attr("disabled",true)
+                        $likebutton = $(document.getElementById(url))
+                        $likebutton.attr("src","/img/unlike.png")
+                        $likebutton.attr("class","unlike")
+                        $likebutton.unbind("click")
+                    }
+                })
+            })
         })
     </script>
 </head>
@@ -249,6 +280,13 @@
     .fn:hover{
         color: #111111;
     }
+    .delbtn{
+        margin-left: 100px;
+    }
+    .unlike{
+        width: 30px;
+        height: 30px;
+    }
 </style>
 <body>
 <div class="head">
@@ -299,8 +337,8 @@
 </div>
 <div class="bot" >
     <div style="display: flex ;margin-left: 20px;">
-        <a class="fn_now" href="">收藏</a>
-        <a class="fn" id="myupload" th:href="@{/mine2}">上传</a>
+        <a class="fn" th:href="@{/mine}">收藏</a>
+        <a class="fn_now" id="myupload" href="">上传</a>
     </div>
     <div id="change_mod">
         <div  class="emptybox">
@@ -310,7 +348,8 @@
         <li>
             <div class="out">
                 <img th:src="${'/pic/'+url}" class="pic">
-                <img class="like2" th:src="@{/img/liked.png}" th:value="${url}" th:id="${url}">
+                    <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+                <button class="delbtn" th:text="删除" th:id="${url+'^'}" th:value="${url}"></button>
             </div>
         </li>
     </ul>
