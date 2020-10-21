@@ -12,5 +12,8 @@ public interface PicInfoService {
     PicInfo SelectByPrimaryKey(String picname);
 
     ArrayList<String> selectUpload(String username);
+
+    int deleteByPrimaryKey(String picname);
+
 }
 

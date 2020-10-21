@@ -1,50 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>登录</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Signin Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
 </head>
-<style>
-    .divcenter {
-        margin: 0 auto;
-        border: 1px solid #888888;
-        text-align: center;
-    }
-    .joinus{
-        text-decoration: none;
-        color: #0366d6;
-    }
-    .joinus:hover{
-        text-decoration: underline;
-    }
-</style>
-<body>
-<div class="divcenter">
-    <h1>登录</h1>
-    <span th:text="${loginmessage}" style="color: #cc2222" th:if="${not #strings.isEmpty(loginmessage)}"></span><br/>
-    <span th:text="${uploadmessage}" style="color: #cc2222" th:if="${not #strings.isEmpty(uploadmessage)}"></span><br/>
-    <form th:action="@{/index}" method="post">
-        账号：<input type="text" name="username"/><br/>
-        密码：<input type="password" name="password"/>
-        <br/>
-        <input type="submit" value="登录">
-    </form>
-    <span>come and join us，<a class="joinus" th:href="@{/register}">注册账号</a></span>
-</div>
-
-<div id="js-flash-container">
-
-    <div class="flash flash-full flash-error ">
-        <div class="container-lg px-2">
-            <button class="flash-close js-flash-close" type="button" aria-label="Dismiss this message">
-                <svg class="octicon octicon-x" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 11-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"></path></svg>
-            </button>
-
-            Incorrect username or password.
-
-        </div>
+<body class="text-center">
+<form class="form-signin" th:action="@{/index}" method="post">
+    <a th:href="@{/index}"><img class="mb-4" src="img/logo2.png" alt="" width="72" height="72"></a>
+    <h1 th:if="${message != null}" th:text="${message}" class="h3 mb-3 font-weight-normal" style="color: red"></h1>
+    <label for="username" class="sr-only">账号</label>
+    <input type="text" id="username" class="form-control" placeholder="用户名" name="username" required autofocus>
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password" required>
+    <div class="checkbox mb-3">
+        <label>
+            <!--            <input type="checkbox" value="remember-me"> Remember me-->
+        </label>
     </div>
-
-</div>
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="登录">
+  <br>
+    <span style="font-size: 1.25rem">or</span>
+    <a th:href="@{/register}" style="font-size: 1.25rem">注册</a>
+  <p class="mt-5 mb-3 text-muted">&copy; handsome_xie</p>
+</form>
 </body>
 </html>

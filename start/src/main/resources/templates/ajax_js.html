@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax_js</title>
+    <script type="text/javascript" th:inline="javascript">
+        function f1() {
+            //发送异步请求
+            //1.创建ajax引擎对象----所有操作都是由ajax引擎完成
+            let xmlHttpRequest = new XMLHttpRequest();
+            //2.为引擎对象绑定监听事件
+            xmlHttpRequest.onreadystatechange = function () {
+                //当状态变化时处理的事情
+                if (xmlHttpRequest.status == 200) {
+                    //5.接收响应信息
+                    let data = xmlHttpRequest.responseText;
+                    document.getElementById("will_change").innerText = data;
+                }
+            }
+            //3.绑定服务器地址
+            //第一个参数：请求方式GET/POST
+            //第二个参数：后台服务器地址
+            //第三个参数：是否是异步 true--异步   false--同步
+            xmlHttpRequest.open("GET", [[@{/ajax/js/test}]],true);
+            //4.发送请求
+            xmlHttpRequest.send();
+        }
+    </script>
+</head>
+<body>
+<div id="will_change">hello js</div>
+<button onclick="f1()">点击获取值</button>
+</body>
+</html>

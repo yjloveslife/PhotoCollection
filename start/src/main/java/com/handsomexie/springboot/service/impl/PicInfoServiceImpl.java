@@ -44,4 +44,10 @@ public class PicInfoServiceImpl implements PicInfoService {
         return picinfomapper.selectUpload(username);
     }
 
+    @Override
+    public int deleteByPrimaryKey(String picname) {
+        return picinfomapper.deleteByPrimaryKey(picname);
+    }
+
+
 }

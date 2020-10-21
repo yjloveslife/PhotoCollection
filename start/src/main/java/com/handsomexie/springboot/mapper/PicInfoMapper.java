@@ -20,4 +20,6 @@ public interface PicInfoMapper {
     ArrayList<String> selectAll();
 
     ArrayList<String> selectUpload(String username);
+
+    ArrayList<String> selectByUsername(String name);
 }
