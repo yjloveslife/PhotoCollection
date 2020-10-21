@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>我的信息</title>
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript"  th:inline="javascript">
@@ -14,10 +13,10 @@
                     data:{"url":$(this).attr("value")},
                 async:false,
                     success:function(url) {
-                        // alert(url)
-                    // $("#change_mod").empty();
-                    // var a="hello"
-                    // $("#change_mod").append(a);//////////////////////////////////搁置
+                        alert(url)
+                    $("#change_mod").empty();
+                    var a="hello"
+                    $("#change_mod").append(a);//////////////////////////////////搁置
                     }
                 })
             });
@@ -25,7 +24,7 @@
                 $("#upload").trigger("click");
                 $("#submit").attr("disabled", false);
             });
-            $(".like2").click(function () {
+            $(".like").click(function () {
                 $.ajax({
                     url:[[@{/like}]],
                         type:"GET",
@@ -42,11 +41,41 @@
                             $pic_jq.attr("class","like2")
                         }
                     }
-            }   )
+                })
             });
+            var pictest="view.jpg"
+            $(document).ready(function () {
+                if([[${#session.getAttribute('user') != null}]]){
+                    // $(".like:first").attr("src",[[@{/img/liked.png}]])
+                    // $(".like:first").attr("class","like2")
+                    var $temp
+                    $.each([[${likelist}]],function (i,val) {
+                        $temp = $(document.getElementById(val))
+                        $temp.attr("src",[[@{/img/liked.png}]])
+                        $temp.attr("class","like2")
+                    })
+                }
+            })
+
+            $(".delbtn").click(function () {
+                $.ajax({
+                    url:[[@{/delete}]],
+                        type:"GET",
+                    data:{"url1":$(this).val()},
+                async:false,
+                    success:function(url) {
+                        let a = url+"^"
+                        $deletebutton = $(document.getElementById(a))
+                        $deletebutton.attr("disabled",true)
+                        $likebutton = $(document.getElementById(url))
+                        $likebutton.attr("src","/img/unlike.png")
+                        $likebutton.attr("class","unlike")
+                        $likebutton.unbind("click")
+                    }
+                })
+            })
         })
     </script>
-    <link href="/css/album.css" rel="stylesheet">
 </head>
 <style>
     *{
@@ -62,24 +91,6 @@
 
     li {
         float: left;
-    }
-    .bigout {
-        width: 100%;
-        height: auto;
-    }
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
     }
     .head {
         /*margin: 10px;*/
@@ -142,9 +153,12 @@
     }
 
     .midleft {
-        width: auto;
-        height: auto;
-        display: block;
+        /*border: 1px solid #0f0;*/
+        width: 15%;
+        height: 200px;
+        display: flex;
+        padding-left: 24px;
+        margin-left: 15%;
     }
 
     .logobig {
@@ -188,7 +202,6 @@
         box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
         transition: all .1s ease-in-out;
         text-align: center;
-        margin-right: 1rem;
     }
     .midrightbutton:hover {
         border-color: #111111;
@@ -210,7 +223,9 @@
     }
     .out {
         display: block;
-        margin: 20px auto;
+        margin: 30px;
+        width: 210px;
+        height: 160px;
     }
     .out .like {
         width: 30px;
@@ -227,9 +242,18 @@
         position: relative;
     }
     .pic {
-        height: auto;
-        max-width: 100%;
+        float: left;
+        /*margin: 50px 50px;*/
+        /*width: 100px;*/
+        /*height: 105px;*/
+        width: 200px;
+        height: 150px;
+        text-align: center;
+        position: relative;
+        overflow: visible;
+        border: 1px dashed transparent;
         border-radius: 5px;
+        display: block;
     }
     .emptybox{
         width: 100%;
@@ -244,82 +268,92 @@
         padding-bottom: 10px;
         margin: 0 10px  ;
         color: #767676;
-        font-size: 1.5rem;
+        font-size: 20px;
     }
     .fn_now{
         color: #111111;
         padding-bottom: 10px;
         margin: 0 10px;
-        font-size: 1.5rem;
+        font-size: 20px;
         box-shadow: inset 0 -2px #111;
     }
-    .fn_now:hover{
-        color: #111111;
-        text-decoration: none;
-    }
     .fn:hover{
-        text-decoration: none;
         color: #111111;
+    }
+    .delbtn{
+        margin-left: 100px;
+    }
+    .unlike{
+        width: 30px;
+        height: 30px;
     }
 </style>
 <body>
-<div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container d-flex justify-content-between">
-        <a th:href="@{/index}" class="navbar-brand d-flex align-items-center">
-            <img src="/img/logo2.png" width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></img>
-            <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-            <strong>coooool</strong>
-        </a>
-        <span class="navbar-toggler">
-            <img th:src="${'/pic/head/'+head}" class="minehead">
-        </span>
+<div class="head">
+    <div class="logodiv">
+        <a th:href="@{/index2}"><img src="/img/logo2.png" class="logo"></a>
+    </div>
+    <div class="searchdiv">
+        <form action="">
+            <input type="search" value="search photos" class="searchinput">
+        </form>
+    </div>
+    <div class="mineheaddiv">
+        <a><img th:src="${'/pic/head/'+head}" class="minehead"></a>
     </div>
 </div>
-<section class="jumbotron text-center"  style="background-color: #ffffff;">
-        <div class="container">
-            <div style="display: flex">
-                <div class="midleft">
-                    <form id="form" th:action="@{/headupload}" method="post" enctype="multipart/form-data">
-                        <input type="file" id="upload" hidden name="head" accept="image/*">
-                        <img th:src="${'/pic/head/'+head}" class="logobig" id="head_pic" alt="${head}">
-                        <div><input id="submit" type="submit" value="更新" disabled>
-                        </div>
-                    </form>
-                </div>
-                <div style="display: block">
-                    <h1 th:text="${username}"></h1>
-                    <p class="lead text-muted" style="">邮箱&nbsp;:<span th:text="${email}"></span></p>
-                    <p class="lead text-muted" style="">QQ&nbsp;:&nbsp;<span th:text="${qq}"></span></p>
-
-                    <p>
-                        <a th:href="@{/userinfoedit}" class="btn btn-primary my-2">修改信息</a>
-                        <a th:href="@{/pic}" class="btn btn-primary my-2">上传图片</a>
-                        <a th:href="@{/quit}" class="btn btn-secondary my-2">退出</a>
-                    </p>
-                </div>
+<div class="mid">
+    <div class="midleft">
+        <form id="form" th:action="@{/headupload}" method="post" enctype="multipart/form-data">
+            <input type="file" id="upload" hidden name="head" accept="image/*">
+            <img th:src="${'/pic/head/'+head}" class="logobig" id="head_pic" alt="${head}">
+            <input id="submit" type="submit" value="更新" disabled >
+        </form>
+    </div>
+    <div class="midright">
+        <div class="midrighttop">
+            <div class="midrightname" th:text="${username}"></div>
+            <div style="margin: 15px 20px;">
+                <a th:href="@{/userinfoedit}" class="midrightbutton">
+                    修改信息
+                </a>
             </div>
+        </div>
+
+        <div class="midrightmessage">
+            <div style="display: flex;padding-bottom: 16px;padding-left: 16px;">
+                邮箱&nbsp;:&nbsp;<div th:text="${email}"></div>
+            </div>
+            <div style="display: flex;padding-bottom: 16px;padding-left: 16px;">
+                QQ&nbsp;:&nbsp;<div th:text="${qq}"></div>
+            </div>
+        </div>
+        <button class="midrightquit">
+            <a th:href="@{/quit}" style="color: #111111;">退出</a>
+        </button>
+
     </div>
-</section>
+
+</div>
 <div class="bot" >
-    <div style="display: flex;margin-left: 5rem;">
-        <a class="fn_now" href="">收藏</a>
-        <a class="fn" id="myupload" th:href="@{/mine2}">上传</a>
+    <div style="display: flex ;margin-left: 20px;">
+        <a class="fn" th:href="@{/mine}">收藏</a>
+        <a class="fn_now" id="myupload" href="">上传</a>
     </div>
-    <hr style="margin: 0;">
+    <hr style="margin: 0">
     <div id="change_mod">
         <div  class="emptybox">
             <img class="emptypic" th:src="@{/img/empty.png}" th:if="${picname.size() eq 0} ">
         </div>
-        <div class="bigout container">
-            <div class="row">
-                <div class="out col-lg-4 col-md-12 col-sm-12 col-xs-12" th:each="url:${picname}">
-                    <img th:src="${'/pic/'+url}" class="pic">
-                    <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                        <img class="like2" th:src="@{/img/liked.png}" th:value="${url}" th:id="${url}">
-                    </div>
-                </div>
+    <ul th:each="url:${picname}" id="loop">
+        <li>
+            <div class="out">
+                <img th:src="${'/pic/'+url}" class="pic">
+                    <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+                <button class="delbtn" th:text="删除" th:id="${url+'^'}" th:value="${url}"></button>
             </div>
-        </div>
+        </li>
+    </ul>
     </div>
 </div>
 </body>
