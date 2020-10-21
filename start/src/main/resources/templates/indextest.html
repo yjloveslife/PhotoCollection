@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+    </script>
+</head>
+<style>
+    .bigout {
+        width: 100%;
+        height: auto;
+    }
+
+    .out {
+        display: block;
+        /*border: 1px solid #000000;*/
+        margin: 20px auto;
+        /*box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);*/
+        /*background-color: #767676;*/
+    }
+
+    .pic {
+        height: auto;
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    .like {
+        height: auto;
+        max-width: 100%;
+        position: relative;
+    }
+</style>
+<body>
+<div class="bigout container">
+    <div class="row">
+        <div class="out col-lg-4 col-md-12 col-sm-12 col-xs-12" th:each="url:${picname}">
+            <img th:src="${'/pic/'+url}" class="pic">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

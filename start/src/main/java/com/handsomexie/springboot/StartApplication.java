@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfigura
 @MapperScan("com.handsomexie.springboot.mapper")
 //@EnableAutoConfiguration(exclude = {MultipartAutoConfiguration.class})
 public class StartApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(StartApplication.class, args);
 	}
