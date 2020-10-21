@@ -148,6 +148,7 @@
     <a th:href="@{/index2}"><img src="/img/logo2.png" class="logo"></a>
 </div>
 <div class="login">
+<!--    -->
     <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" >登录</a>
     <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" ><img th:src="${'/pic/head/'+head}" class="minehead"></a>
 </div>
