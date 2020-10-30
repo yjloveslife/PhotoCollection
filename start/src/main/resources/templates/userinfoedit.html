@@ -1,24 +1,53 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<style>
-    .big {
-        width: 100px;
-        height: 100px;
-        margin: 200px auto;
 
-    }
-</style>
-<div class="big">
-<form th:action="@{/infoedit}">
-    邮箱<input type="text" th:value="${email}" name="email"><br>
-    QQ：<input type="text" th:value="${qq}" name="qq">
-    <input type="submit" value="确认修改">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>修改信息</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/infoedit}" method="post">
+    <a th:href="@{/index}"><img class="mb-4" src="img/logo2.png" alt="" width="72" height="72"></a>
+
+    <label for="Email" class="sr-only">邮箱</label>
+    <input type="text" id="Email" class="form-control" placeholder="邮箱" name="email" th:value="${email}" required autofocus>
+    <label for="inputText" class="sr-only">QQ</label>
+    <input type="text" id="inputText" class="form-control" placeholder="QQ" name="qq" th:value="${qq}" required>
+    <div class="checkbox mb-3">
+        <label>
+            <!--            <input type="checkbox" value="remember-me"> Remember me-->
+        </label>
+    </div>
+    <input type="submit" class="btn btn-lg btn-primary btn-block" value="确认修改">
+    <p class="mt-5 mb-3 text-muted">&copy; handsome_xie</p>
 </form>
-</div>
 </body>
 </html>
