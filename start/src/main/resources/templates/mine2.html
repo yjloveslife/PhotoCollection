@@ -76,6 +76,14 @@
                 })
             })
         })
+        function show(){
+            let picform = document.getElementById("picform");
+            picform.submit();
+        }
+        function choosefile(){
+            let picform = document.getElementById("picupload");
+            picform.click();
+        }
     </script>
     <link href="/css/album.css" rel="stylesheet">
     <link href="/css/common.css" rel="stylesheet">
@@ -170,12 +178,15 @@
                 <h1 th:text="${username}"></h1>
                 <p class="lead text-muted" style="">邮箱&nbsp;:<span th:text="${email}"></span></p>
                 <p class="lead text-muted" style="">QQ&nbsp;:&nbsp;<span th:text="${qq}"></span></p>
+                <form th:action="@{/clickupload}" method="post" enctype="multipart/form-data" id="picform">
+                    <p>
+                        <a th:href="@{/userinfoedit}" class="btn btn-primary my-2">修改信息</a>
+                        <input type="file" id="picupload" name="upload" accept="image/*" onchange="show();" hidden>
 
-                <p>
-                    <a th:href="@{/userinfoedit}" class="btn btn-primary my-2">修改信息</a>
-                    <a th:href="@{/pic}" class="btn btn-primary my-2">上传图片</a>
-                    <a th:href="@{/quit}" class="btn btn-secondary my-2">退出</a>
-                </p>
+                        <a class="btn btn-primary my-2" onclick="choosefile();">上传图片</a>
+                        <a th:href="@{/quit}" class="btn btn-secondary my-2">退出</a>
+                    </p>
+                </form>
             </div>
         </div>
     </div>

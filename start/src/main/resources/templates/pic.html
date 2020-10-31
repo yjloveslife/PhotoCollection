@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>图片上传</title>
+    <script>
+        function show(){
+            alert("hello");
+            let picform = document.getElementById("picform");
+            picform.submit();
+        }
+    </script>
 </head>
 <style>
     .upload {
@@ -13,8 +20,8 @@
 </style>
 <body>
 <div class="upload">
-    <form th:action="@{/picupload}" method="post" enctype="multipart/form-data">
-        <input type="file" name="upload" accept="image/*">
+    <form th:action="@{/picupload}" method="post" enctype="multipart/form-data" id="picform">
+        <input type="file" name="upload" accept="image/*" onchange="show();">
         <br/><br/>
         <!--    <input type="text" name="username" >-->
         <input type="submit" value="上传">

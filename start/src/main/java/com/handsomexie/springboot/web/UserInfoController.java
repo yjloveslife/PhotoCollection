@@ -286,6 +286,24 @@ public class UserInfoController {
         }
         return "/pic";
     }
+    //图片点击后直接上传
+    @RequestMapping(value = "/clickupload", method = RequestMethod.POST)//上传图片
+    public String clickupload(@RequestParam(value = "upload") MultipartFile upload, Model model, HttpServletRequest request) {
+        long pid = System.currentTimeMillis();
+        int result = 0;
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+        result = picinfoserivce.insert(upload.getOriginalFilename(), "test", user.getUsername(), pid);
+        try {
+            if (result == 1) {
+                upload.transferTo(new File(url + upload.getOriginalFilename()));
+                model.addAttribute("message", "上传成功");
+                model.addAttribute("picreturn", "/pic/" + upload.getOriginalFilename());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/mine2";
+    }
 
     @RequestMapping("/delete")
     public @ResponseBody
