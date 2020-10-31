@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>首页</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/common.css">
 
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.js"></script>
-
 
     <script type="text/javascript" th:inline="javascript">
         $(function () {
@@ -64,61 +66,6 @@
     </script>
 </head>
 <style>
-    ul {
-        list-style-type: none;
-        list-style-image: none;
-    }
-    li {
-        float: left;
-    }
-
-    .logodiv {
-        width: 5rem;
-        height: 5rem;
-        position: absolute;
-        left: 10px;
-    }
-    .logo {
-        width: 100%;
-        height: auto;
-    }
-    .divcenter {
-        width: 100%;
-        height: 7rem;
-        margin: 20px auto;
-        color: #232323;
-        text-align: center;
-        /*border: 3px solid #999999;*/
-    }
-    .minehead {
-        width: 7rem;
-        height: 7rem;
-        border-radius: 50%;
-    }
-    .login {
-        position: absolute;
-        right: 10px;
-        font-size: 2rem;
-        text-decoration: none;
-    }
-
-    .pic {
-        height: auto;
-        max-width: 100%;
-        border-radius: 5px;
-    }
-
-    .bigout {
-        width: 100%;
-        height: auto;
-    }
-    .out {
-        display: block;
-        /*border: 1px solid #000000;*/
-        margin: 20px auto;
-        /*box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);*/
-        /*background-color: #767676;*/
-    }
 /*
     .out:hover {
         -webkit-filter: blur(1px);
@@ -128,46 +75,45 @@
         filter: blur(0.5px);
     }
 */
-    .like {
-        height: auto;
-        max-width: 100%;
-        position: relative;
-    }
-    .like:hover {
-        content: url("/img/like2.png");
-    }
-    .out .like2 {
-        height: auto;
-        max-width: 100%;
-        position: relative;
-    }
+
 </style>
 <body>
 
-<div class="logodiv">
-    <a th:href="@{/index2}"><img src="/img/logo2.png" class="logo"></a>
-</div>
-<div class="login">
-<!--    -->
-<!--    -->
-    <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" >登录</a>
-    <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" ><img th:src="${'/pic/head/'+head}" class="minehead"></a>
-</div>
-<div class="divcenter">
-    <span style="font-size: 46px;">coooool</span>
-    <span id="likemessage"></span>
-    <!--    <a th:if="${#strings.isEmpty(username)}" th:href="@{/login}" class="login">登录</a>-->
+
+<div class="navbar navbar-dark bg-dark shadow-sm" id="thetop">
+    <div class="container d-flex justify-content-between">
+        <a th:href="@{/index2}" class="navbar-brand d-flex align-items-center">
+            <img src="/img/logo2.png" width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></img>
+            <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+            <strong>coooool</strong>
+            <span id="likemessage"></span>
+        </a>
+        <span class="navbar-toggler" >
+            <a th:if="${#session.getAttribute('user') == null}" th:href="@{/login}" style="color: #fff;">登录</a>
+            <a th:if="${#session.getAttribute('user') != null}" th:href="@{/mine}" ><img th:src="${'/pic/head/'+head}" class="minehead"></a>
+        </span>
+    </div>
 </div>
 
 <div class="bigout container">
     <div class="row">
         <div class="out col-lg-4 col-md-12 col-sm-12 col-xs-12" th:each="url:${picname}">
             <img th:src="${'/pic/'+url}" class="pic">
-            <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+            <div style="width: 100%;display: flex">
+                <div class="likeimg">
+                    <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+                </div>
+                <div style="position:absolute;right: 1rem;">
+
+                    <a  th:href="${'/pic/'+url}" th:download="${url}">
+                        <img src="/img/download.png" class="downloadimg">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<p class="mt-5 mb-3 text-muted copy">&copy; handsome_xie</p>
+<a  href="#thetop" ><img src="/img/ic_totop.png" style="width: 2rem;height: 2rem; position:fixed;right: 1rem;bottom: 1rem;"></a>
 </body>
 </html>

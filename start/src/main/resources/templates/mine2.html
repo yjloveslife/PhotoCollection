@@ -78,45 +78,9 @@
         })
     </script>
     <link href="/css/album.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
 </head>
 <style>
-    *{
-        text-decoration: none;
-    }
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
-    }
-    ul {
-        list-style-type: none;
-        list-style-image: none;
-    }
-
-    li {
-        float: left;
-    }
-    .bigout {
-        width: 100%;
-        height: auto;
-    }
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-    .minehead {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-    }
 
     .midleft {
         width: auto;
@@ -137,32 +101,6 @@
         filter: blur(1px);
     }
 
-    .bot {
-
-    }
-    .out {
-        display: block;
-        margin: 20px auto;
-    }
-    .out .like {
-        width: 30px;
-        height: 30px;
-        position: relative;
-    }
-    .like:hover {
-        content: url("/img/like2.png");
-    }
-
-    .out .like2 {
-        width: 30px;
-        height: 30px;
-        position: relative;
-    }
-    .pic {
-        height: auto;
-        max-width: 100%;
-        border-radius: 5px;
-    }
     .emptybox{
         width: 100%;
         text-align: center;
@@ -197,15 +135,15 @@
         text-decoration: none;
     }
     .delbtn{
-        margin-left: 100px;
-    }
-    .unlike{
-        width: 30px;
-        height: 30px;
+        border: #555 1px solid;
+        border-radius: 0.2rem;
+        position: absolute;
+        right:0.7rem;
+        top: 0.7rem;
     }
 </style>
 <body>
-<div class="navbar navbar-dark bg-dark shadow-sm">
+<div class="navbar navbar-dark bg-dark shadow-sm"  id="thetop">
     <div class="container d-flex justify-content-between">
         <a th:href="@{/index2}" class="navbar-brand d-flex align-items-center">
             <img src="/img/logo2.png" width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></img>
@@ -257,14 +195,21 @@
             <div class="row">
                 <div class="out col-lg-4 col-md-12 col-sm-12 col-xs-12" th:each="url:${picname}">
                     <img th:src="${'/pic/'+url}" class="pic">
-                    <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                        <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+                    <div style="width: 100%;position:relative;" >
+<!--                        左右分布-->
+                        <div class="likeimg" >
+                            <img class="like" th:src="@{/img/like.png}" th:value="${url}" th:id="${url}">
+                        </div>
+                        <button class="delbtn" th:text="删除" th:id="${url+'^'}" th:value="${url}"></button>
                     </div>
-                    <button class="delbtn" th:text="删除" th:id="${url+'^'}" th:value="${url}"></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<p class="mt-5 mb-3 text-muted copy">&copy; handsome_xie</p>
+
+<a  href="#thetop" ><img src="/img/ic_totop.png" style="width: 1rem;height: 1rem; position:fixed;right: 0.7rem;bottom: 0.7rem;"></a>
+
 </body>
 </html>

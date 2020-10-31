@@ -1,0 +1,72 @@
+*{
+    text-decoration: none;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+}
+ul {
+    list-style-type: none;
+    list-style-image: none;
+}
+li {
+    float: left;
+}
+.minehead {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.bigout {
+    width: 100%;
+    height: auto;
+}
+.out {
+    display: block;
+    margin: 20px auto;
+}
+.pic {
+    height: auto;
+    max-width: 100%;
+    border-radius: 5px;
+}
+.like {
+    height: auto;
+    max-width: 100%;
+}
+.like:hover {
+    content: url("/img/like2.png");
+}
+.like2 {
+    height: auto;
+    max-width: 100%;
+    position: relative;
+}
+.likeimg{
+    width: 3rem;
+}
+@media (min-width: 1024px) {
+    .likeimg {
+        width: 3rem;
+    }
+}
+.downloadimg{
+    position: relative;
+    right: 1px;
+    width: 3rem;
+}
+@media (min-width: 1024px) {
+    .downloadimg {
+        width: 3rem;
+    }
+}
+
+.unlike{
+    height: auto;
+    max-width: 100%;
+    position: relative;
+}
+
+.copy{
+    text-align: center;
+    margin: 0 auto;
+}
