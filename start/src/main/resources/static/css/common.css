@@ -24,6 +24,14 @@ li {
     display: block;
     margin: 20px auto;
 }
+.head_info{
+    display: inline;
+}
+@media (min-width: 768px) {
+    .head_info {
+        display: flex;
+    }
+}
 .pic {
     height: auto;
     max-width: 100%;
