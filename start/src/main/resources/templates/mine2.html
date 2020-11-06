@@ -165,7 +165,7 @@
 </div>
 <section class="jumbotron text-center"  style="background-color: #ffffff;">
     <div class="container">
-        <div style="display: flex">
+        <div class="head_info">
             <div class="midleft">
                 <form id="form" th:action="@{/headupload}" method="post" enctype="multipart/form-data">
                     <input type="file" id="upload" hidden name="head" accept="image/*">
@@ -195,7 +195,8 @@
 <div class="bot" >
     <div style="display: flex ;margin-left: 5rem;">
         <a class="fn" th:href="@{/mine}">收藏</a>
-        <a class="fn_now" id="myupload">上传</a>
+<!--        <a class="fn_now" id="myupload">上传</a>-->
+        <a class="fn_now">上传</a>
     </div>
     <hr style="margin: 0">
     <div id="change_mod">

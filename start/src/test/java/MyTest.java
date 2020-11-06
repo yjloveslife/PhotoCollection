@@ -46,6 +46,10 @@ public class MyTest {
 //        Arrays.sort(new int[]{1,3,2,4,6,5});
         System.out.println(result);
     }
+    @Test
+    public void learn_array(){
+        List<Integer> arr = new ArrayList<>();
+    }
 }
 
 class PasswordUtils{
